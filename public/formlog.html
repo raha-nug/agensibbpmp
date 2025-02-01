@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Login</title>
+    <link rel="stylesheet" href="formlog.css">
+</head>
+<script>
+    function goToHome() {
+        window.location.href = 'admin.html'; // Ganti dengan URL beranda yang sesuai
+    }
+</script>
+<body>
+
+    <nav class="navbar">
+        <div class="close">
+         <button type="button" onclick="goToHome()" class="close-button" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="form-box">
+            <div class="icon">
+                <img src="asset/user.svg" alt="User Icon">
+            </div>
+            <form>
+                <input type="text" placeholder="Nama Instansi">
+                <input type="email" placeholder="E-Mail">
+                <input type="password" placeholder="Password">
+            </form>
+        </div>
+    </div>
+</body>
+</html>

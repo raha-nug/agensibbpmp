@@ -1,0 +1,191 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    height: 100vh;
+    overflow: hidden;
+}
+.navbar {
+    background-color: #ffffff;
+    color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    position: relative;
+}
+
+.close-button {
+  background-color: transparent; /* Hapus latar belakang tombol */
+  border: 1px solid #00A2E9; /* Tambahkan border 1px solid biru */
+  color: #00A2E9; /* Ubah warna teks menjadi biru */
+  padding: 5px 10px; /* Berikan padding untuk menyesuaikan ukuran tombol */
+  border-radius: 5px; /* Agar sudut tombol sedikit melengkung */
+  cursor: pointer; /* Ubah kursor saat dihover menjadi tangan */
+}
+
+.chat-container {
+    display: flex;
+    height: 100vh;
+    max-width: 100%;
+    margin: 0 auto;
+    background-color: white;
+}
+
+.chat-sidebar {
+    width: 250px;
+    background-color: #f4f4f4;
+    border-right: 1px solid #ddd;
+    padding: 10px;
+    position: fixed;
+    height: 100%;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.chat-header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 10px 0;
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+}
+
+
+.sidebar-button {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: #00A2E9;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+}
+
+.sidebar-button.active {
+    background-color: #007acc;
+}
+
+.sidebar-icon {
+    font-size: 1.5rem;
+    margin-right: 10px;
+}
+
+.chat-body {
+    flex: 1;
+    margin-left: 250px; /* Adjust to leave space for the sidebar */
+    padding: 20px;
+    overflow-y: auto;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-bubble {
+    max-width: 70%;
+    margin-left: 10px;
+    margin-bottom: 15px;
+    padding: 10px 15px;
+    border-radius: 15px;
+    position: relative;
+    word-wrap: break-word;
+    font-size: 16px;
+}
+
+.chat-bubble.sent {
+    background-color: #93dfff;
+    margin-left: auto;
+    text-align: right;
+    border-bottom-right-radius: 0;
+}
+
+.chat-bubble.received {
+    background-color: #e5e5ea;
+    text-align: left;
+    border-bottom-left-radius: 0;
+}
+
+.chat-input {
+    display: flex;
+    padding: 15px;
+    background-color: white;
+    border-top: 1px solid #ddd;
+    position: fixed;
+    bottom: 0;
+    left: 270px; /* Adjust to align with the chat body */
+    right: 0;
+}
+
+.chat-input input {
+    flex: 1;
+    padding: 10px 15px;
+    border: 2px solid #00A2E9;
+    border-radius: 50px;
+    margin-right: 10px;
+    outline: none;
+    font-size: 16px;
+}
+
+.chat-input button {
+    border: none;
+    border-radius: 50%;
+    background-color: #00A2E9;
+    color: white;
+    cursor: pointer;
+    padding: 10px;
+    font-size: 1.2rem;
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+    .chat-sidebar {
+        width: 100%;
+        position: static;
+        height: auto;
+        padding: 10px 0;
+        border-right: none;
+        box-shadow: none;
+    }
+
+    .chat-body {
+        margin-left: 0;
+        padding: 20px 10px;
+    }
+
+    .chat-input {
+        left: 0;
+        padding: 15px 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .chat-bubble {
+        max-width: 90%;
+        font-size: 14px;
+    }
+
+    .chat-input input {
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+
+    .send-icon-btn {
+        background-size: 24px 24px; /* Adjust size as needed */
+        border: none;
+        background-color: #00a2ff;
+        padding: 10px;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+    
+}

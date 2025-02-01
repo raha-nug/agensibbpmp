@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Status Surat</title>
+    <link rel="stylesheet" href="status.css">
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <button class="back-btn" onclick="window.location.href='masuk.html'">
+                <img src="asset/back.svg" alt="Back">
+            </button>
+            <p>Batas Waktu 29 - 08 - 2024</p>
+        </div>
+
+        <h1>Surat Undangan</h1>
+        <div class="comment-section">
+            <img src="asset/comment.svg" alt="Comment">
+            <p>Komentar secara pribadi</p>
+        </div>
+        <hr>
+
+        <p class="content">
+            Bapak/Ibu yang terhormat, harap perhatikan waktu dan tempat pada surat undangan. Segera konfirmasi kehadiran Bapak/Ibu.
+        </p>
+
+        <div class="status-container">
+            <div class="checkbox-group">
+                <label><input type="checkbox" id="received" onchange="updateStatus('received')" /> Diterima</label>
+                <label><input type="checkbox" id="read" onchange="updateStatus('read')" /> Dibaca</label>
+                <label><input type="checkbox" id="downloaded" onchange="updateStatus('downloaded')" /> Diunduh</label>
+            </div>
+            <div class="file-download">
+                <img src="asset/file.svg" alt="File Icon">
+                <p>Surat Undangan</p>
+                <button class="download-btn">
+                    <img src="asset/download.svg" alt="Download">
+                </button>
+            </div>
+        </div>
+
+        <div class="btn-container">
+            <button class="complete-btn" onclick="redirectToPage()">SELESAI</button>
+        </div>
+        
+    </div>
+
+    <script>
+        function updateStatus(statusType) {
+            const status = document.getElementById(statusType).checked;
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", "update_status.php", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    console.log(xhr.responseText);
+                }
+            };
+            xhr.send("statusType=" + statusType + "&status=" + (status ? 1 : 0));
+        }
+
+        function completeProcess() {
+            alert("Proses telah selesai.");
+        }
+
+        function redirectToPage() {
+                window.location.href = "user.html"; // Replace "target-page.html" with the actual target page URL
+            }
+    </script>
+
+</body>
+</html>

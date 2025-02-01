@@ -1,0 +1,79 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+}
+
+.navbar {
+    background-color: #ffffff;
+    color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    position: relative;
+}
+
+.close-button {
+  background-color: transparent; /* Hapus latar belakang tombol */
+  border: 1px solid #007bff; /* Tambahkan border 1px solid biru */
+  color: #007bff; /* Ubah warna teks menjadi biru */
+  padding: 5px 10px; /* Berikan padding untuk menyesuaikan ukuran tombol */
+  border-radius: 5px; /* Agar sudut tombol sedikit melengkung */
+  cursor: pointer; /* Ubah kursor saat dihover menjadi tangan */
+}
+
+.close-button:hover {
+  background-color: #007bff; /* Ubah warna latar belakang saat dihover menjadi biru */
+  color: #ffffff; /* Ubah warna teks saat dihover menjadi putih */
+}
+
+.close-button:focus {
+  outline: none; /* Hapus outline saat tombol mendapatkan fokus */
+}
+
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.form-box {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 20px;
+    border: 2px solid #00aaff;
+    border-radius: 10px;
+}
+
+.icon {
+    margin-right: 20px;
+}
+
+.icon img {
+    width: 100px; /* Ganti ukuran sesuai kebutuhan */
+    height: auto;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form input {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #00aaff;
+    border-radius: 5px;
+    width: 300px;
+}
+
+form input::placeholder {
+    color: #00aaff;
+    font-size: 10px;
+}

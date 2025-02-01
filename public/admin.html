@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="hamburger">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <h1>AGENSI</h1>
+    </nav>
+
+    <div class="overlay" id="overlay"></div>
+    
+    <div class="sidebar" id="sidebar">
+        <div class="profile">
+            <img src="asset/bbpmp.png" alt="Profile Image">
+        </div>
+        <ul>
+            <li><a href="formlog.html" class="active">
+                <span class="icon"><i class="fas fa-user"></i></span>
+                <span class="item">Profile</span>
+            </a></li>
+            <li><a href="comment.html">
+                <span class="icon"><i class="fas fa-comment-alt"></i></span>
+                <span class="item">Privat Comment</span>
+            </a></li>
+            <li><a href="face.html">
+                <span class="icon"><i class="fas fa-sign-out-alt"></i></span>
+                <span class="item">Log Out</span>
+            </a></li>
+        </ul>
+        
+        <footer class="sidebar-footer">
+            <p>&copy; 1.1 Version</p>
+        </footer>
+    </div>  
+
+    <div class="main-container">
+        <div class="photo-container">
+            <img src="asset/bbpmp.png" alt="Main Photo">
+        </div>
+        
+        <div class="clickable-container" onclick="location.href='upload.html';">
+            <img src="asset/upload.png" alt="Surat Masuk">
+            <div>
+                <h2>Kirim Surat</h2>
+                <p>Silahkan Upload Surat Disini</p>
+            </div>
+        </div>
+        
+        <div class="clickable-container" onclick="location.href='track.html';">
+            <img src="asset/tracking.png" alt="Notifikasi">
+            <div>
+                <h2>Tracking</h2>
+                <p>Silahkan Cek Tracking Surat Disini</p>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">        
+        <img src="asset/out.png" alt="Footer Image"> 
+        <p>Jl. Raya Batujajar No.KM.2 No.90, <br>Padalarang, Bandung Barat<br> Jawa Barat 40553</p>
+    </footer>
+
+    <script src="admin.js"></script>
+    
+</body>
+</html>

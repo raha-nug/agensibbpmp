@@ -1,0 +1,43 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Users {
+  id Int @id @default(autoincrement())
+  nama String
+  email String @unique
+  password String
+  role Role @relation(fields: [roleType], references: [type])
+  roleType String
+  surat SuratOnUsers[]
+}
+
+model Role {
+  id Int @id @default(autoincrement())
+  type String @unique
+  user Users[]
+}
+
+model Surat {
+  id Int @id @default(autoincrement())
+  judul String
+  tujuan SuratOnUsers[]
+  deskripsi String
+  lampiran String
+  deadline DateTime
+}
+
+model SuratOnUsers {
+  userId Int
+  suratId Int
+  user Users @relation(fields: [userId], references: [id])
+  surat Surat @relation(fields: [suratId], references: [id])
+  isReaded Boolean @default(false)
+  isDownloaded Boolean @default(false)
+  @@id([userId, suratId])
+}

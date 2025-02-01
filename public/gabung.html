@@ -1,0 +1,70 @@
+ 
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>AGENSI</title>
+     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+     <link rel="stylesheet" href="join.css">
+ </head>
+ <body>
+     <nav class="navbar">
+         <div class="hamburger">
+             <div></div>
+             <div></div>
+             <div></div>
+         </div>
+     </nav>
+ 
+         <div class="sidebar" id="sidebar">
+             <button class="close-btn" id="close-btn">&times;</button>
+             <div class="profile">
+                 <img src="asset/bbpmp.png" alt="Profile Image">
+             </div>
+             <ul>
+                 <li><a href="#" class="active">
+                     <span class="icon"><i class="fas fa-user"></i></span>
+                     <span class="item">Profile</span>
+                 </a></li>
+                 <li><a href="#">
+                     <span class="icon"><i class="fas fa-sign-out-alt"></i></span>
+                     <span class="item">Log Out</span>
+                 </a></li>
+             </ul>
+             <footer class="sidebar-footer">
+                 <p>&copy; 2023 AGENSI. All rights reserved.</p>
+             </footer>
+         </div>  
+ 
+     <div class="main-container">
+         <div class="photo-container">
+             <img src="asset/bbpmp.png" alt="Main Photo">
+         </div>
+         
+         <div class="clickable-container" onclick="location.href='masuk.html';">
+             <img src="asset/masuk.png" alt="Photo 1">
+             <div>
+                 <h2>Surat Masuk</h2>
+                 <p>Silahkan cek surat disini</p>
+             </div>
+         </div>
+         
+         <div class="clickable-container" onclick="location.href='notif.html';">
+             <img src="asset/notif.png" alt="Photo 2">
+             <div>
+                 <h2>Notifikasi</h2>
+                 <p>Silahkan  buka pemberitahuan disini</p>
+             </div>
+         </div>
+     </div>
+ 
+     <footer class="footer">        
+         <img src="asset/out.png"> 
+         <p>Jl. Raya Batujajar No.KM.2 No.90, <br>Padalarang, Bandung Barat<br> Jawa Barat 40553</p>
+     </footer>
+ 
+     <script src="join.js"></script>
+     
+ </body>
+ </html>

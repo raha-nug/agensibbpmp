@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Surat Keluar</title>
+    <link rel="stylesheet" href="surat.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="close">
+            <button type="button" class="close-button" aria-label="Close" onclick="goToHome()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="search">
+            <button type="button" class="search-button" aria-label="Search">
+                <span>&#128269;</span>
+            </button>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="letters">
+            <button class="letter" onclick="window.location.href='tracking.html'">
+                <strong>Surat Undangan</strong>
+                <span>28 - 08 - 2024</span>
+            </button>
+            <button class="letter" onclick="window.location.href='tracking-page.html?letter=2'">
+                <strong>Surat Undangan</strong>
+                <span>28 - 08 - 2024</span>
+            </button>
+            <button class="letter" onclick="window.location.href='tracking-page.html?letter=3'">
+                <strong>Surat Undangan</strong>
+                <span>28 - 08 - 2024</span>
+            </button>
+        </div>
+    </div>
+    <script src="surat.js"></script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Interface</title>
+    <link rel="stylesheet" href="comment.css">
+</head>
+<script>
+    function goToHome() {
+        window.location.href = 'admin.html'; // Ganti dengan URL beranda yang sesuai
+    }
+</script>
+<body>
+    <nav class="navbar">
+        <div class="close">
+         <button type="button" onclick="goToHome()" class="close-button" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+    </nav>
+    <div class="chat-container">
+        <div class="chat-sidebar">
+            <div class="chat-header">
+            </div>
+            <button class="sidebar-button active">
+                <span class="sidebar-icon">💬</span> 
+                Kota Bandung
+            </button>
+        </div>
+        <div class="chat-body" id="chat-body">
+            <!-- Chat bubbles will be inserted here -->
+        </div>
+        <div class="chat-input">
+            <input type="text" id="chat-message" placeholder="Tambah komentar...">
+            <button id="send-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-send" viewBox="0 0 16 16">
+                    <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576zm6.787-8.201L1.591 6.602l4.339 2.76z"/>
+                </svg>
+                <i class="bi bi-send"></i>
+            </button>
+        </div>
+    </div>
+    <script src="comment.js"></script>
+</body>
+</html>

@@ -1,0 +1,112 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.navbar {
+    background-color: #ffffff;
+    color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    position: relative;
+}
+
+.close-button {
+  background-color: transparent; 
+  border: 1px solid #007bff;
+  color: #007bff;
+  padding: 5px 10px; 
+  border-radius: 5px; 
+  cursor: pointer; 
+}
+
+.close-button:hover {
+  background-color: #007bff;
+  color: #ffffff;
+}
+
+.close-button:focus {
+  outline: none;
+}
+
+.dropdowns {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.dropdown-group {
+    width: 30%; /* Adjust this as necessary */
+}
+
+.dropdown {
+    background-color: #00A2E9;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 5px;
+    width: 100%; /* Make sure the button spans the full width of its container */
+    transition: background-color 0.3s;
+}
+
+.dropdown .arrow {
+    margin-left: 10px;
+}
+
+.dropdown:hover {
+    background-color: #0077b8;
+}
+
+.status {
+    display: none; /* Initially hidden */
+    flex-direction: column;
+    align-items: flex-start;
+    padding-top: 10px;
+}
+
+.status ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.status li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    color: #00A2E9;
+}
+
+.status-icon {
+    font-size: 24px;
+    margin-right: 10px;
+}
+
+.status-text strong {
+    font-size: 18px;
+    display: block;
+    color: #00A2E9;
+}
+
+.status-text p {
+    margin: 0;
+    font-size: 14px;
+    color: #666;
+}

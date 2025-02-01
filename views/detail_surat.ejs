@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Status Surat</title>
+    <link rel="stylesheet" href="/status.css" />
+  </head>
+  <body>
+
+    <% const userTujuan = surat.tujuan.find(t => t.userId === userId); %>
+
+    <div class="container">
+      <div class="header">
+        <button class="back-btn" onclick="window.location.href='/agensi/surat'">
+          <img src="/asset/back.svg" alt="Back" />
+        </button>
+        <p>
+          Deadline : <%= new Date(surat.deadline).toLocaleDateString('id-ID')%>
+        </p>
+      </div>
+
+      <h1><%= surat.judul %></h1>
+      <div class="comment-section">
+        <img src="/asset/comment.svg" alt="Comment" />
+        <p>Komentar secara pribadi</p>
+      </div>
+      <hr />
+
+      <p class="content"><%= surat.deskripsi %></p>
+
+      <div class="status-container">
+        <div class="checkbox-group">
+          <label>
+            <input type="checkbox" id="received" checked disabled />
+            Diterima
+          </label>
+          <label>
+            <input type="checkbox" value="read" name="read" id="read"
+            onchange="updateStatus('read')" <%= userTujuan.isReaded ? 'checked disabled' : ""
+            %> /> Dibaca
+          </label>
+          <label>
+            <input type="checkbox" value="download" id="download"  name="download"
+            <%=
+            userTujuan.isDownloaded ? 'checked disabled' : "" %>
+            <%= userTujuan.isReaded ? "" : "disabled" %>
+            onchange="updateStatus('download')" /> Diunduh
+          </label>
+        </div>
+        <div class="file-download">
+          <img src="/asset/file.svg" alt="File Icon" />
+          <p>Surat Undangan</p>
+          <a href="<%= surat.lampiran %>" class="download-btn">
+            <img src="/asset/download.svg" alt="Download" />
+          </a>
+        </div>
+      </div>
+
+      <div class="btn-container">
+        <button class="complete-btn" onclick="redirectToPage()">SELESAI</button>
+      </div>
+    </div>
+
+    <script>
+      function updateStatus(statusType) {
+        const status = document.getElementById(statusType).value;
+        const data = fetch(
+          `/surat-user/<%= userId %>/<%= surat.id %>/${status}`,
+          {
+            method: "PUT",
+          }
+        )
+          .then((res) => res.json())
+          .then((data) =>{
+
+          console.log(data)
+
+          if (statusType === 'read') {
+              document.getElementById("download").removeAttribute("disabled");
+            }
+        
+      });
+      }
+
+      function redirectToPage() {
+        window.location.href = "/agensi";
+      }
+    </script>
+  </body>
+</html>

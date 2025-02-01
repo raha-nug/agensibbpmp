@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Surat</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="upload.css">
+</head>
+<body>
+    <div class="top-bar">
+        <button class="close-btn" onclick="goToHome()"><i class="fas fa-times"></i></button>
+        <button class="send-btn"><i class="fas fa-paper-plane"></i> Kirim</button>
+    </div>
+    
+    <div class="form-container">
+        <!-- Judul Surat -->
+        <div class="input-container">
+            <i class="fas fa-heading"></i>
+            <input type="text" id="judul" placeholder="Judul Surat">
+        </div>
+
+        <!-- Deskripsi Surat -->
+        <div class="input-container">
+            <i class="fas fa-align-left"></i>
+            <textarea id="deskripsi" placeholder="Deskripsi"></textarea>
+        </div>
+
+        <!-- Tujuan Surat -->
+        <div class="input-container">
+            <i class="fas fa-user"></i>
+            <select id="tujuan">
+                <option>Tujuan Surat</option>
+                <option>Kabupaten Bandung</option>
+                <option>Kota Bandung</option>
+                <option>Kabupaten Bandung Barat</option>
+                <option>Kabupaten Bekasi</option>
+                <option>Kabupaten Bogor</option>
+                <option>Kabupaten Ciamis</option>
+                <option>Kabupaten Cirebon</option>
+                <option>Kabupaten Garut</option>
+                <option>Kabupaten Indramayu</option>
+                <option>Kabupaten Karawang</option>
+                <option>Kabupaten Kuningan</option>
+                <option>Kabupaten Majalengka</option>
+                <option>Kabupaten Pangandaran</option>
+                <option>Kabupaten Purwakarta</option>
+                <option>Kabupaten Subang</option>
+                <option>Kabupaten Sukabumi</option>
+                <option>Kabupaten Sumedang</option>
+                <option>Kabupaten Tasikmalaya</option>
+                <option>Kota Bandung</option>
+                <option>Kota Banjar</option>
+                <option>Kota Bekasi</option>
+                <option>Kota Bogor</option>
+                <option>Kota Cimahi</option>
+                <option>Kota Cirebon</option>
+                <option>Kota Depok</option>
+                <option>Kota Sukabumi</option>
+                <option>Kota Tasikmalaya</option>
+                <!-- Tambahkan opsi lainnya -->
+            </select>
+        </div>
+
+        <!-- Atur Batas Waktu -->
+        <div class="input-container">
+            <i class="fas fa-calendar-alt"></i>
+            <input type="date" id="batas-waktu" placeholder="Atur Batas Waktu">
+        </div>
+
+        <!-- Lampirkan Surat -->
+        <div class="input-container">
+            <i class="fas fa-paperclip"></i>
+            <input type="file" id="lampiran">
+        </div>
+    </div>
+
+    <script>
+        function goToHome() {
+            window.location.href = 'admin.html'; // Sesuaikan URL halaman
+        }
+    </script>
+</body>
+</html>

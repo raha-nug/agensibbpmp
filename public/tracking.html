@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Tracking</title>
+    <link rel="stylesheet" href="tracking.css">
+</head>
+<script>
+    function goToHome() {
+        window.location.href = 'surat.html'; // Ganti dengan URL beranda yang sesuai
+    }
+</script>
+<body>
+    <nav class="navbar">
+        <div class="close">
+            <button type="button" onclick="goToHome()" class="close-button" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="dropdowns">
+            <div class="dropdown-group">
+                <button class="dropdown" id="btnBandung">Kota Bandung <span class="arrow">&#x25B2;</span></button>
+                <div class="status" id="statusBandung">
+                    <ul></ul>
+                </div>
+            </div>
+            <div class="dropdown-group">
+                <button class="dropdown" id="btnTasiknalaya">Kota Tasikmalaya <span class="arrow">&#x25BC;</span></button>
+                <div class="status" id="statusTasikmalaya">
+                    <ul></ul>
+                </div>
+            </div>
+            <div class="dropdown-group">
+                <button class="dropdown" id="btnKabBandung">Kab. Bandung <span class="arrow">&#x25BC;</span></button>
+                <div class="status" id="statusKabBandung">
+                    <ul></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="tracking.js"></script>
+</body>
+</html>

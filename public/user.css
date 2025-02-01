@@ -1,0 +1,272 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    color: #333;
+    transition: all 0.3s ease;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em;
+    background: #00A2E9;
+    color: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 1001;
+}
+
+.navbar h1 {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+    font-size: 24px;
+    letter-spacing: 6px;
+}
+
+.hamburger {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.hamburger div {
+    width: 25px;
+    height: 3px;
+    background: #fff;
+}
+
+.sidebar {
+    width: 250px;
+    height: 100%;
+    background: #fbfbfb;
+    position: fixed;
+    top: 0;
+    left: -250px;
+    transition: all 0.3s ease;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+}
+
+.sidebar.active {
+    left: 0;
+}
+
+.profile {
+    text-align: center;
+    margin-bottom: 1em;
+}
+
+.profile img {
+    width: 80px;
+    border-radius: 50%;
+    margin-top: 20px; 
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+    margin: 0;
+    margin-left: 20px;
+}
+
+.sidebar ul li {
+    margin-bottom: 10px;
+    justify-content: flex-start;
+}
+
+.sidebar ul li a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    padding: 10px;
+    width: 80%;
+    border: 2px solid #00A2E9;
+    border-radius: 8px;
+    color: #00A2E9;
+    font-size: 18px;
+    transition: background 0.3s ease;
+}
+
+.sidebar ul li a .icon {
+    margin-right: 10px;
+    font-size: 18px;
+}
+
+.sidebar ul li a:hover {
+    background: #e0f7ff;
+    color: #00A2E9;
+}
+
+
+.sidebar-footer {
+    text-align: center;
+    padding: 10px;
+    color: #000000;
+    margin-top: auto;
+    font-size: 12px; /* Ubah ukuran font sesuai kebutuhan */
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 900;
+}
+
+.overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.main-container {
+    padding: 20px;
+    transition: all 0.3s ease;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+body.active .main-container {
+    margin-left: 250px;
+}
+
+.photo-container {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.photo-container img {
+    max-width: 30%;
+    height: auto;
+}
+
+.clickable-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    outline: 2px solid #00A2E9;
+    border-radius: 10px;
+    background-color: #fff;
+    transition: transform 0.3s ease;
+}
+
+.clickable-container:hover {
+    transform: scale(1.05);
+}
+
+.clickable-container img {
+    max-width: 80px;
+    margin-right: 20px;
+}
+
+.clickable-container h2 {
+    color: #00A2E9;
+    margin-bottom: 5px;
+    font-size: 20px;
+}
+
+.clickable-container p {
+    color: #666;
+    font-size: 14px;
+    margin: 0;
+}
+
+.footer {
+    margin-top: 300px;
+    background-color: #646464;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+.footer img {
+    width: 20%;
+    padding: 0px;
+    height: auto;
+}
+
+.footer p {
+    font-size: 14px;
+    margin: 0;
+}
+
+/* Media queries */
+@media (max-width: 768px) {
+    .main-container {
+        padding: 10px;
+    }
+
+    .clickable-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .clickable-container img {
+        margin-bottom: 10px;
+        max-width: 60px;
+    }
+
+    .clickable-container h2 {
+        font-size: 18px;
+    }
+
+    .clickable-container p {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar h1 {
+        font-size: 20px;
+    }
+
+    .sidebar {
+        width: 200px;
+        left: -200px;
+    }
+
+    .sidebar.active {
+        left: 0;
+    }
+
+    .main-container {
+        padding: 5px;
+    }
+
+    .clickable-container img {
+        max-width: 50px;
+    }
+
+    .clickable-container h2 {
+        font-size: 16px;
+    }
+
+    .clickable-container p {
+        font-size: 12px;
+    }
+
+    .footer img {
+        width: 60px;
+    }
+}

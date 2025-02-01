@@ -1,0 +1,104 @@
+body {
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+  color: #00a2e9;
+}
+
+.navbar {
+  background-color: #ffffff;
+  color: black;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  position: relative;
+}
+
+.close-button {
+  background-color: transparent; /* Hapus latar belakang tombol */
+  border: 1px solid #007bff; /* Tambahkan border 1px solid biru */
+  color: #007bff; /* Ubah warna teks menjadi biru */
+  padding: 5px 10px; /* Berikan padding untuk menyesuaikan ukuran tombol */
+  border-radius: 5px; /* Agar sudut tombol sedikit melengkung */
+  cursor: pointer; /* Ubah kursor saat dihover menjadi tangan */
+}
+
+.close-button:hover {
+  background-color: #007bff; /* Ubah warna latar belakang saat dihover menjadi biru */
+  color: #ffffff; /* Ubah warna teks saat dihover menjadi putih */
+}
+
+.close-button:focus {
+  outline: none; /* Hapus outline saat tombol mendapatkan fokus */
+}
+
+.legend-item {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+
+.legend-item.unread {
+  background-color: red;
+}
+
+.legend-item.read {
+  background-color: blue;
+}
+
+
+.main-container {
+  padding: 20px;
+}
+
+.clickable-container {
+  display: flex;
+  justify-content: center; /* Center content horizontally */
+  align-items: center; /* Center content vertically */
+  text-align: center; /* Center text alignment */
+  margin: 23px 0; /* Vertical margins */
+  padding: 15px; /* Space inside the container */
+  border: 2px solid #ddd; /* Optional: border color */
+  cursor: pointer; /* Pointer cursor on hover */
+  background-color: #00a2e9; /* Light blue color */
+  outline: 2px solid #00a2e9; /* Optional: outline color */
+  border-radius: 20px; /* Rounded corners */
+  max-width: 100%; /* Ensure container does not exceed viewport width */
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+.clickable-container h2,
+.clickable-container p {
+  color: #ffffff; /* White text color */
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; /* Font family */
+  margin: 0; /* Remove default margin */
+  padding: 0; /* Remove default padding */
+  text-align: center; /* Center text alignment */
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.clickable-container h2 {
+  font-size: 1.5rem; /* Adjust font size as needed */
+}
+
+.clickable-container p {
+  font-size: 1rem; /* Adjust font size as needed */
+}
+
+.clickable-container.unread {
+  background-color: red;
+  color: white;
+}
+
+.clickable-container.read {
+  background-color: blue;
+  color: white;
+}
+
+.clickable-container:hover {
+  opacity: 0.9;
+}

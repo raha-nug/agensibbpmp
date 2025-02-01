@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Status Surat</title>
+    <link rel="stylesheet" href="/track.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  </head>
+  <script>
+    function goToHome() {
+      window.location.href = "/admin"; // Ganti dengan URL beranda yang sesuai
+    }
+  </script>
+  <body>
+    <div class="container">
+      <div class="header">
+        <div class="close">
+          <button class="close-btn" onclick="goToHome()">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="search-container">
+          <input type="text" class="search-bar" placeholder="Search" />
+          <i class="fas fa-search search-icon"></i>
+        </div>
+      </div>
+      <table class="status-table">
+        <thead>
+          <tr>
+            <th>Judul Surat</th>
+            <th>Tujuan Surat</th>
+            <th>Status</th>
+            <th>Keterangan</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% surat.forEach(function(s) { %> <% s.tujuan.forEach(function(t,
+          index) { %>
+          <tr>
+            <% if (index === 0) { %>
+            <!-- Rowspan hanya untuk baris pertama -->
+            <td rowspan="<%= s.tujuan.length %>"><%= s.judul %></td>
+            <% } %>
+            <td><%= t.user.nama %></td>
+            <td>
+              <% if (t.isReaded && t.isDownloaded) { %>
+              <span class="badge green">Selesai</span>
+              <% } else if (t.isReaded === true && t.isDownloaded === false) {
+              %>
+              <span class="badge yellow">Sudah dibaca</span>
+              <% } else { %>
+              <span class="badge red">Belum Dibaca</span>
+              <% } %>
+            </td>
+            <% if (index === 0) { %>
+            <!-- Rowspan hanya untuk baris pertama -->
+            <td rowspan="<%= s.tujuan.length %>">
+              <%= s.deskripsi || "Tidak ada keterangan" %>
+            </td>
+            <% } %>
+          </tr>
+          <% }) %> <% }) %>
+        </tbody>
+      </table>
+    </div>
+    <script src="/coba.js"></script>
+  </body>
+</html>

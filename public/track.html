@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Status Surat</title>
+    <link rel="stylesheet" href="track.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<script>
+    function goToHome() {
+        window.location.href = 'admin.html'; // Ganti dengan URL beranda yang sesuai
+    }
+</script>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="close">
+                <button class="close-btn" onclick="goToHome()"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="search-container">
+                <input type="text" class="search-bar" placeholder="Search">
+                <i class="fas fa-search search-icon"></i>
+            </div>
+        </div>        
+        <table class="status-table">
+            <thead>
+                <tr>
+                    <th>Tujuan Surat</th>
+                    <th>Status</th>
+                    <th>Keterangan</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Kabupaten Bandung</td>
+                    <td>Diterima</td>
+                    <td><span class="badge red">Belum Selesai</span></td>
+                </tr>
+                <tr>
+                    <td>Kabupaten Bandung Barat</td>
+                    <td>Diterima</td>
+                    <td><span class="badge red">Belum Selesai</span></td>
+                </tr>
+                <tr>
+                    <td>Kabupaten Tasikmalaya</td>
+                    <td>Diterima</td>
+                    <td><span class="badge red">Belum Selesai</span></td>
+                </tr>
+                <tr>
+                    <td>Kabupaten Bogor</td>
+                    <td>Diunduh</td>
+                    <td><span class="badge green">Selesai</span></td>
+                </tr>
+                <tr>
+                    <td>Kabupaten Ciamis</td>
+                    <td>Diunduh</td>
+                    <td><span class="badge green">Selesai</span></td>
+                </tr>
+                <tr>
+                    <td>Kota Tasikmalaya</td>
+                    <td>Dibaca</td>
+                    <td><span class="badge red">Belum Selesai</span></td>
+                </tr>
+                <tr>
+                    <td>Kota Depok</td>
+                    <td>Diunduh</td>
+                    <td><span class="badge green">Selesai</span></td>
+                </tr>
+                <tr>
+                    <td>Kota Bekasi</td>
+                    <td>Dibaca</td>
+                    <td><span class="badge red">Belum Selesai</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script src="coba.js"></script>
+</body>
+</html>

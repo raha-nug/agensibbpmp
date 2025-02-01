@@ -1,0 +1,88 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    height: 100%;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    background: linear-gradient(to bottom, #ffffff 70%, #1caae8 30%);
+    box-shadow: inset 0 -10px 20px rgba(0,0,0,0.2);
+}
+
+.logo img {
+    width: 200px;
+    height: auto;
+    margin-bottom: 40px; /* Adjust based on the positioning of the logo and the button */
+}
+
+.masuk-button {
+    font-size: 18px;
+    color: #1caae8;
+    background-color: transparent;
+    border: 2px solid #1caae8;
+    padding: 10px 30px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    margin-top: -20px; /* Adjust this value to move the button up into the white area */
+}
+
+.masuk-button:hover {
+    background-color: #1caae8;
+    color: #ffffff;
+}
+
+#loading {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.loading-bar {
+    width: 80%;
+    max-width: 500px;
+    height: 8px;
+    background-color: #e0e0e0;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.loading-bar-progress {
+    height: 100%;
+    width: 0;
+    background-color: #00A2E9;
+    border-radius: 20px;
+    animation: loading 3s infinite;
+}
+
+@keyframes loading {
+    0% {
+        width: 0;
+    }
+    50% {
+        width: 75%;
+    }
+    100% {
+        width: 100%;
+    }
+}
+
+#content {
+    text-align: center;
+    padding: 20px;
+}

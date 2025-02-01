@@ -1,0 +1,170 @@
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header .back-btn img {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+h1 {
+    color: #00ADEF;
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.comment-section {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.comment-section img {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid #00ADEF;
+    margin: 20px 0;
+}
+
+.content {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+/* Status Section */
+.status-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.checkbox-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.checkbox-group label {
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
+
+.file-download {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.file-download img {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+
+.file-download p {
+    font-size: 1rem;
+    margin-right: 10px;
+}
+
+.download-btn {
+    background: none;
+    border: 2px solid #00ADEF;
+    padding: 5px 1px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.download-btn img {
+    width: 24px;
+    height: 24px;
+}
+
+.download-btn:hover {
+    background-color: #00ADEF;
+    color: white;
+}
+
+/* Button */
+.btn-container {
+    text-align: right;
+    margin-top: 30px;
+}
+
+.complete-btn {
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    border: 2px solid #00ADEF;
+    background-color: white;
+    color: #00ADEF;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.complete-btn:hover {
+    background-color: #00ADEF;
+    color: white;
+}
+
+/* SVG Icon Styling */
+header .back-btn img,
+.comment-section img,
+.file-download img,
+.download-btn img {
+    fill: #00A2E9;
+    width: 24px;
+    height: 24px;
+    transition: fill 0.3s ease;
+}
+
+/* Hover Effects */
+header .back-btn img:hover,
+.comment-section img:hover,
+.file-download img:hover,
+.download-btn img:hover {
+    fill: #0079b6; /* Slightly darker shade for hover effect */
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .status-container {
+        flex-direction: column;
+    }
+
+    .file-download {
+        margin-top: 10px;
+    }
+
+    .btn-container {
+        text-align: center;
+        margin-top: 20px;
+    }
+}
