@@ -1,7 +1,7 @@
 const express = require("express");
 const cookieParser = require("cookie-parser");
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 const authRoute = require("./routes/auth.routes");
 const agensiRoute = require("./routes/agensi.routes");
