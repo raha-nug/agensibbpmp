@@ -51,21 +51,20 @@ const createSurat = async (req, res) => {
   try {
     let lampiran = null;
 
+    // Jika ada file yang diupload, langsung kirim ke Hostinger FTP
     if (req.file) {
-      console.log("📂 File uploaded:", req.file.originalname);
+      const localPath = req.file.path;
+      const fileName = Date.now() + "-" + req.file.originalname;
+      const remotePath = `uploads/${fileName}`; // Path di Hostinger
 
-      const remotePath = `/public_html/uploads/${Date.now()}_${
-        req.file.originalname
-      }`;
+      await uploadToFTP(localPath, remotePath); // Upload ke Hostinger
 
-      try {
-        await uploadToFTP(req.file.buffer, remotePath);
-        console.log("✅ Upload ke FTP berhasil:", remotePath);
-        lampiran = `/uploads/${remotePath.split("/").pop()}`;
-      } catch (ftpError) {
-        console.error("❌ Gagal upload ke FTP:", ftpError);
-        return res.status(500).json({ error: "Gagal upload file ke server" });
-      }
+      lampiran = `/uploads/${fileName}`; // Simpan path di database
+
+      // Hapus file sementara dari Vercel setelah diupload ke Hostinger
+      fs.unlink(localPath, (err) => {
+        if (err) console.error("Gagal menghapus file sementara:", err);
+      });
     }
 
     const surat = await prisma.surat.create({
@@ -76,28 +75,18 @@ const createSurat = async (req, res) => {
         deadline: new Date(deadline),
         tujuan: {
           create: tujuan.map((userId) => ({
-            user: { connect: { id: parseInt(userId) } },
+            user: {
+              connect: { id: parseInt(userId) },
+            },
           })),
         },
       },
     });
 
-    const users = await prisma.users.findMany({
-      where: { id: { in: tujuan.map((id) => parseInt(id)) } },
-    });
-
-    users.forEach((user) => {
-      sendEmail({
-        to: user.email,
-        subject: "Notifikasi Surat Baru",
-        text: `Anda memiliki surat baru berjudul "${judul}" yang harus dibaca sebelum ${deadline}.`,
-      });
-    });
-
     res.redirect("/admin/track");
   } catch (error) {
-    console.error("❌ Error saat membuat surat:", error);
-    res.status(500).json({ error: "Gagal membuat surat" });
+    console.error("❌ Error:", error);
+    res.status(500).json({ error: "Failed to create surat" });
   }
 };
 

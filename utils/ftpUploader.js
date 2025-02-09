@@ -12,14 +12,17 @@ async function uploadToFTP(fileBuffer, remotePath) {
       secure: false, // Hostinger biasanya pakai FTP tanpa SSL
     });
 
-    console.log("📡 Terhubung ke FTP. Mengupload file...");
+    console.log("✅ Connected to FTP!");
 
-    // Upload langsung dari buffer ke FTP
-    await client.uploadFrom(Buffer.from(fileBuffer), remotePath);
-    console.log("✅ Upload berhasil:", remotePath);
-  } catch (error) {
-    console.error("❌ Gagal upload ke FTP:", error);
-    throw error;
+    // Pastikan folder `uploads/` sudah ada, jika belum buat dulu
+    await client.ensureDir("public_html/uploads");
+
+    // Unggah file dari local ke remote FTP server
+    await client.uploadFrom(localPath, `public_html/uploads/${remotePath}`);
+
+    console.log("✅ File uploaded successfully!");
+  } catch (err) {
+    console.error("❌ FTP Upload Error:", err);
   } finally {
     client.close();
   }
