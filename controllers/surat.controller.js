@@ -3,6 +3,7 @@ const prisma = new PrismaClient();
 const path = require("path");
 const fs = require("fs");
 const sendEmail = require("./send_mail");
+const ftpUploader = require("../utils/ftpUploader")
 
 // Get All Surat
 const getAllSurat = async (req, res) => {
@@ -47,7 +48,22 @@ const getSuratById = async (req, res) => {
 const createSurat = async (req, res) => {
   const { judul, deskripsi, deadline, tujuan } = req.body;
   try {
-    const lampiran = req.file ? `/uploads/${req.file.filename}` : null;
+    let lampiran = null;
+
+    // Jika ada file yang diupload, simpan ke FTP Hostinger
+    if (req.file) {
+      const localPath = req.file.path;
+      const remotePath = `/public_html/uploads/${req.file.filename}`;
+
+      await uploadToFTP(localPath, remotePath); // Upload ke Hostinger
+
+      lampiran = `/uploads/${req.file.filename}`; // Simpan path di database
+
+      // Hapus file sementara setelah diupload ke FTP
+      fs.unlink(localPath, (err) => {
+        if (err) console.error("Gagal menghapus file sementara:", err);
+      });
+    }
 
     const surat = await prisma.surat.create({
       data: {
@@ -79,14 +95,10 @@ const createSurat = async (req, res) => {
 
     res.redirect("/admin/track");
   } catch (error) {
+    // Jika ada file, hapus dari sistem
     if (req.file) {
-      const filePath = path.join(__dirname, "../", req.file.path); // Dapatkan path file
-      fs.unlink(filePath, (err) => {
-        if (err) {
-          console.error("Error deleting file:", err);
-        } else {
-          console.log("File deleted successfully");
-        }
+      fs.unlink(req.file.path, (err) => {
+        if (err) console.error("Gagal menghapus file:", err);
       });
     }
 
