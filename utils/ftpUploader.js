@@ -4,6 +4,8 @@ async function uploadToFTP(fileBuffer, remotePath) {
   const client = new ftp.Client();
   client.ftp.verbose = true; // Logging agar bisa debug
 
+  const BASE_URL = "https://uploads.agensibbpmp.com";
+
   try {
     await client.access({
       host: "ftp.agensibbpmp.com",
@@ -21,6 +23,8 @@ async function uploadToFTP(fileBuffer, remotePath) {
     await client.uploadFrom(localPath, `public_html/uploads/${remotePath}`);
 
     console.log("✅ File uploaded successfully!");
+
+    return `${BASE_URL}/${remoteFileName}`;
   } catch (err) {
     console.error("❌ FTP Upload Error:", err);
   } finally {

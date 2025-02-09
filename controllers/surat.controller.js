@@ -51,18 +51,12 @@ const createSurat = async (req, res) => {
   try {
     let lampiran = null;
 
-    // Jika ada file yang diupload, langsung kirim ke Hostinger FTP
     if (req.file) {
-      const localPath = req.file.path;
-      const fileName = Date.now() + "-" + req.file.originalname;
-      const remotePath = `uploads/${fileName}`; // Path di Hostinger
+      const filename = `${Date.now()}-${req.file.originalname}`; // Nama unik
+      lampiran = await uploadToFTP(req.file.path, filename); // Upload ke Hostinger
 
-      await uploadToFTP(localPath, remotePath); // Upload ke Hostinger
-
-      lampiran = `/uploads/${fileName}`; // Simpan path di database
-
-      // Hapus file sementara dari Vercel setelah diupload ke Hostinger
-      fs.unlink(localPath, (err) => {
+      // Hapus file lokal setelah diupload
+      fs.unlink(req.file.path, (err) => {
         if (err) console.error("Gagal menghapus file sementara:", err);
       });
     }
@@ -71,13 +65,11 @@ const createSurat = async (req, res) => {
       data: {
         judul,
         deskripsi,
-        lampiran,
+        lampiran, // Simpan URL, bukan path lokal
         deadline: new Date(deadline),
         tujuan: {
           create: tujuan.map((userId) => ({
-            user: {
-              connect: { id: parseInt(userId) },
-            },
+            user: { connect: { id: parseInt(userId) } },
           })),
         },
       },
@@ -85,8 +77,8 @@ const createSurat = async (req, res) => {
 
     res.redirect("/admin/track");
   } catch (error) {
-    console.error("❌ Error:", error);
-    res.status(500).json({ error: "Failed to create surat" });
+    console.error(error);
+    res.status(500).json({ error: "Gagal membuat surat" });
   }
 };
 
