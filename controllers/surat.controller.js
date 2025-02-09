@@ -47,24 +47,33 @@ const getSuratById = async (req, res) => {
 // Create New Surat
 const createSurat = async (req, res) => {
   const { judul, deskripsi, deadline, tujuan } = req.body;
+
   try {
     let lampiran = null;
 
-    // Jika ada file yang diupload, simpan ke FTP Hostinger
     if (req.file) {
-      const localPath = req.file.path;
-      const remotePath = `/public_html/uploads/${req.file.filename}`;
+      console.log("📂 File uploaded:", req.file);
 
-      await uploadToFTP(localPath, remotePath); // Upload ke Hostinger
+      const localPath = req.file.path; // File sementara di `/tmp/`
+      const remotePath = `/public_html/uploads/${req.file.filename}`; // Path di Hostinger
 
-      lampiran = `/uploads/${req.file.filename}`; // Simpan path di database
+      // Upload file ke FTP
+      try {
+        await uploadToFTP(localPath, remotePath);
+        console.log("✅ Upload ke FTP berhasil:", remotePath);
+        lampiran = `/uploads/${req.file.filename}`;
 
-      // Hapus file sementara setelah diupload ke FTP
-      fs.unlink(localPath, (err) => {
-        if (err) console.error("Gagal menghapus file sementara:", err);
-      });
+        // Hapus file lokal setelah upload sukses
+        fs.unlink(localPath, (err) => {
+          if (err) console.error("⚠️ Gagal menghapus file sementara:", err);
+        });
+      } catch (ftpError) {
+        console.error("❌ Gagal upload ke FTP:", ftpError);
+        return res.status(500).json({ error: "Gagal upload file ke server" });
+      }
     }
 
+    // Simpan data surat ke database
     const surat = await prisma.surat.create({
       data: {
         judul,
@@ -73,14 +82,13 @@ const createSurat = async (req, res) => {
         deadline: new Date(deadline),
         tujuan: {
           create: tujuan.map((userId) => ({
-            user: {
-              connect: { id: parseInt(userId) }, // Menghubungkan user yang dipilih
-            },
+            user: { connect: { id: parseInt(userId) } },
           })),
         },
       },
     });
 
+    // Kirim email notifikasi
     const users = await prisma.users.findMany({
       where: { id: { in: tujuan.map((id) => parseInt(id)) } },
     });
@@ -95,17 +103,17 @@ const createSurat = async (req, res) => {
 
     res.redirect("/admin/track");
   } catch (error) {
-    // Jika ada file, hapus dari sistem
+    console.error("❌ Error saat membuat surat:", error);
+
     if (req.file) {
       fs.unlink(req.file.path, (err) => {
-        if (err) console.error("Gagal menghapus file:", err);
+        if (err) console.error("⚠️ Gagal menghapus file:", err);
       });
     }
 
-    res.status(500).json({ error: "Failed to create surat" });
+    res.status(500).json({ error: "Gagal membuat surat" });
   }
 };
-
 // Update Surat
 const updateSurat = async (req, res) => {
   const { id } = req.params;

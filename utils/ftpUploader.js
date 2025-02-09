@@ -9,20 +9,20 @@ async function uploadToFTP(localFilePath, remoteFilePath) {
     await client.access({
       host: "ftp.agensibbpmp.com",
       user: "u143117858.agensibbpmp",
-      password: "FTPAccount123*", 
-      secure: false, 
+      password: "FTPAccount123*",
+      secure: false,
     });
 
-    console.log("Terhubung ke FTP...");
-
-    // Upload file ke Hostinger
-    await client.uploadFrom(localFilePath, remoteFilePath);
-    console.log("Upload berhasil:", remoteFilePath);
-  } catch (err) {
-    console.error("Upload gagal:", err);
+    console.log("📡 Terhubung ke FTP. Mengupload file...");
+    await client.uploadFrom(localPath, remotePath);
+    console.log("✅ Upload berhasil:", remotePath);
+  } catch (error) {
+    console.error("❌ Gagal upload ke FTP:", error);
+    throw error;
+  } finally {
+    client.close();
   }
 
-  client.close();
 }
 
 module.exports = uploadToFTP;
