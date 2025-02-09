@@ -52,28 +52,22 @@ const createSurat = async (req, res) => {
     let lampiran = null;
 
     if (req.file) {
-      console.log("📂 File uploaded:", req.file);
+      console.log("📂 File uploaded:", req.file.originalname);
 
-      const localPath = req.file.path; // File sementara di `/tmp/`
-      const remotePath = `/public_html/uploads/${req.file.filename}`; // Path di Hostinger
+      const remotePath = `/public_html/uploads/${Date.now()}_${
+        req.file.originalname
+      }`;
 
-      // Upload file ke FTP
       try {
-        await uploadToFTP(localPath, remotePath);
+        await uploadToFTP(req.file.buffer, remotePath);
         console.log("✅ Upload ke FTP berhasil:", remotePath);
-        lampiran = `/uploads/${req.file.filename}`;
-
-        // Hapus file lokal setelah upload sukses
-        fs.unlink(localPath, (err) => {
-          if (err) console.error("⚠️ Gagal menghapus file sementara:", err);
-        });
+        lampiran = `/uploads/${remotePath.split("/").pop()}`;
       } catch (ftpError) {
         console.error("❌ Gagal upload ke FTP:", ftpError);
         return res.status(500).json({ error: "Gagal upload file ke server" });
       }
     }
 
-    // Simpan data surat ke database
     const surat = await prisma.surat.create({
       data: {
         judul,
@@ -88,7 +82,6 @@ const createSurat = async (req, res) => {
       },
     });
 
-    // Kirim email notifikasi
     const users = await prisma.users.findMany({
       where: { id: { in: tujuan.map((id) => parseInt(id)) } },
     });
@@ -104,16 +97,10 @@ const createSurat = async (req, res) => {
     res.redirect("/admin/track");
   } catch (error) {
     console.error("❌ Error saat membuat surat:", error);
-
-    if (req.file) {
-      fs.unlink(req.file.path, (err) => {
-        if (err) console.error("⚠️ Gagal menghapus file:", err);
-      });
-    }
-
     res.status(500).json({ error: "Gagal membuat surat" });
   }
 };
+
 // Update Surat
 const updateSurat = async (req, res) => {
   const { id } = req.params;

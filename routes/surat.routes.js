@@ -4,19 +4,8 @@ const suratController = require("../controllers/surat.controller");
 const { isAdmin } = require("../middlewares/auth.middleware");
 
 const multer = require("multer");
-const path = require("path");
 
-// Menyimpan file di `/tmp/` karena Vercel tidak bisa menyimpan permanen
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "/tmp/"); // Folder sementara
-  },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + path.extname(file.originalname)); // Nama file unik
-  },
-});
-
-// Membuat instance multer dengan storage
+const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
 // Surat routes
