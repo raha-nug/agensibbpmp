@@ -1,118 +1,76 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
 }
-
 .container {
-    max-width: 1500px;
-    margin: 30px auto;
-    padding: 20px;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+  max-width: 1500px;
+  margin: 30px auto;
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
 }
-
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-bottom: 20px;
+.table-responsive {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
 }
-.close-btn {
-    display: flex;
-    align-items: center;
-    padding: 8px 15px;
-    font-size: 16px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.close-btn {
-    background-color: #ffffff;
-    border: 2px solid #00aaff;
-    color: #00aaff;
-}
-
-.close-btn:hover {
-    background-color: #00aaff;
-    color: #ffffff;
-}
-  
-
-.search-bar {
-    width: 200px;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-.search-container {
-    position: relative;
-    display: inline-block;
-}
-
-.search-bar {
-    width: 200px;
-    padding: 8px;
-    padding-right: 35px; /* memberi ruang untuk ikon */
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.search-icon {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #ccc;
-    font-size: 16px;
-    cursor: pointer;
-}
-
 .status-table {
-    width: 100%;
-    border-collapse: collapse;
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px;
 }
-
 .status-table th {
-    background-color: #0099ff;
-    color: white;
-    padding: 12px 15px;
+  background-color: #0099ff;
+  color: white;
+  padding: 12px 15px;
+  text-align: left;
 }
-
 .status-table td {
-    padding: 12px 15px;
-    text-align: center;
-    border: 1px solid #ddd;
+  padding: 12px 15px;
+  text-align: center;
+  border: 1px solid #ddd;
 }
-
 .status-table tbody tr:hover {
-    background-color: #f1f1f1;
+  background-color: #f1f1f1;
 }
-
 .badge {
-    padding: 5px 10px;
-    border-radius: 12px;
-    font-size: 12px;
-    color: white;
-    text-align: center;
-    display: inline-block;
+  padding: 5px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  color: white;
+  text-align: center;
+  display: inline-block;
 }
-
 .badge.red {
-    background-color: #ff4d4d;
+  background-color: #ff4d4d;
 }
-
 .badge.green {
-    background-color: #4caf50;
+  background-color: #4caf50;
 }
 .badge.yellow {
-    background-color: #aaaf4c;
+  background-color: #aaaf4c;
 }
-
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+.pagination button {
+  padding: 10px 15px;
+  margin: 0 5px;
+  border: none;
+  background-color: #0099ff;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.pagination button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}

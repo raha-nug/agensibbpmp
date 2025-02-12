@@ -4,67 +4,88 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Status Surat</title>
-    <link rel="stylesheet" href="/track.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="/track.css" />
   </head>
-  <script>
-    function goToHome() {
-      window.location.href = "/admin"; // Ganti dengan URL beranda yang sesuai
-    }
-  </script>
   <body>
     <div class="container">
-      <div class="header">
-        <div class="close">
-          <button class="close-btn" onclick="goToHome()">
-            <i class="fas fa-times"></i>
-          </button>
-        </div>
-        <div class="search-container">
-          <input type="text" class="search-bar" placeholder="Search" />
-          <i class="fas fa-search search-icon"></i>
-        </div>
-      </div>
-      <table class="status-table">
-        <thead>
-          <tr>
-            <th>Judul Surat</th>
-            <th>Tujuan Surat</th>
-            <th>Status</th>
-            <th>Keterangan</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% surat.forEach(function(s) { %> <% s.tujuan.forEach(function(t,
-          index) { %>
-          <tr>
-            <% if (index === 0) { %>
-            <!-- Rowspan hanya untuk baris pertama -->
-            <td rowspan="<%= s.tujuan.length %>"><%= s.judul %></td>
-            <% } %>
-            <td><%= t.user.nama %></td>
-            <td>
-              <% if (t.isReaded && t.isDownloaded) { %>
-              <span class="badge green">Selesai</span>
-              <% } else if (t.isReaded === true && t.isDownloaded === false) {
-              %>
-              <span class="badge yellow">Sudah dibaca</span>
-              <% } else { %>
-              <span class="badge red">Belum Dibaca</span>
+      <div class="table-responsive">
+        <table class="status-table" id="statusTable">
+          <thead>
+            <tr>
+              <th>Judul Surat</th>
+              <th>Tujuan Surat</th>
+              <th>Status</th>
+              <th>Keterangan</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody">
+            <% surat.forEach(function(s) { %> <% s.tujuan.forEach(function(t,
+            index) { %>
+            <tr>
+              <% if (index === 0) { %>
+              <td rowspan="<%= s.tujuan.length %>"><%= s.judul %></td>
               <% } %>
-            </td>
-            <% if (index === 0) { %>
-            <!-- Rowspan hanya untuk baris pertama -->
-            <td rowspan="<%= s.tujuan.length %>">
-              <%= s.deskripsi || "Tidak ada keterangan" %>
-            </td>
-            <% } %>
-          </tr>
-          <% }) %> <% }) %>
-        </tbody>
-      </table>
+              <td><%= t.user.nama %></td>
+              <td>
+                <% if (t.isReaded && t.isDownloaded) { %>
+                <span class="badge green">Selesai</span>
+                <% } else if (t.isReaded === true && t.isDownloaded === false) {
+                %>
+                <span class="badge yellow">Sudah dibaca</span>
+                <% } else { %>
+                <span class="badge red">Belum Dibaca</span>
+                <% } %>
+              </td>
+              <% if (index === 0) { %>
+              <td rowspan="<%= s.tujuan.length %>">
+                <%= s.deskripsi || "Tidak ada keterangan" %>
+              </td>
+              <% } %>
+            </tr>
+            <% }) %> <% }) %>
+          </tbody>
+        </table>
+      </div>
+      <div class="pagination">
+        <button id="prevPage" disabled>Prev</button>
+        <button id="nextPage">Next</button>
+      </div>
     </div>
+    <script>
+      const rowsPerPage = 10;
+      let currentPage = 1;
+      const table = document.getElementById("statusTable");
+      const tbody = document.getElementById("tableBody");
+      const rows = Array.from(tbody.getElementsByTagName("tr"));
+
+      function showPage(page) {
+        const start = (page - 1) * rowsPerPage;
+        const end = start + rowsPerPage;
+        rows.forEach((row, index) => {
+          row.style.display = index >= start && index < end ? "" : "none";
+        });
+        document.getElementById("prevPage").disabled = page === 1;
+        document.getElementById("nextPage").disabled = end >= rows.length;
+      }
+
+      document.getElementById("prevPage").addEventListener("click", () => {
+        if (currentPage > 1) {
+          currentPage--;
+          showPage(currentPage);
+        }
+      });
+
+      document.getElementById("nextPage").addEventListener("click", () => {
+        if (currentPage * rowsPerPage < rows.length) {
+          currentPage++;
+          showPage(currentPage);
+        }
+      });
+
+      showPage(currentPage);
+    </script>
   </body>
 </html>
