@@ -49,7 +49,6 @@ body {
   background-color: blue;
 }
 
-
 .main-container {
   padding: 20px;
 }
@@ -101,4 +100,23 @@ body {
 
 .clickable-container:hover {
   opacity: 0.9;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+.pagination button {
+  padding: 10px 15px;
+  margin: 0 5px;
+  border: none;
+  background-color: #0099ff;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.pagination button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
 }
