@@ -1,24 +1,32 @@
 const ftp = require("basic-ftp");
+const stream = require("stream");
 
-async function uploadToFTP(fileBuffer, remotePath) {
+async function uploadToFTP(buffer, remotePath) {
   const client = new ftp.Client();
   client.ftp.verbose = true; // Logging agar bisa debug
 
   try {
     await client.access({
-      host: "ftp.agensibbpmp.com",
-      user: "u143117858.agensibbpmp",
-      password: "FTPAccount123*",
-      secure: false, // Hostinger biasanya pakai FTP tanpa SSL
+      host: process.env.FTP_HOST, // Gunakan hostname yang sesuai
+      user: process.env.FTP_USER, // Gunakan username yang sesuai
+      password: process.env.FTP_PASS, // Gunakan password yang sesuai
+      secure: false, // Pastikan sesuai dengan konfigurasi Hostinger
     });
 
     console.log("✅ Connected to FTP!");
 
-    // Pastikan folder `uploads/` sudah ada, jika belum buat dulu
-    await client.ensureDir("public_html/uploads");
+    // Pastikan folder target ada, jika belum buat dulu
+    await client.ensureDir(".");
 
-    // Unggah file dari local ke remote FTP server
-    await client.uploadFrom(localPath, `public_html/uploads/${remotePath}`);
+    // Konversi buffer ke stream agar bisa diunggah ke FTP
+    const readableStream = new stream.PassThrough();
+    readableStream.end(buffer);
+
+    // Upload file dari buffer ke remote FTP
+    await client.uploadFrom(
+      readableStream,
+      `/${remotePath}`
+    );
 
     console.log("✅ File uploaded successfully!");
   } catch (err) {

@@ -6,20 +6,8 @@ const { isAdmin } = require("../middlewares/auth.middleware");
 const prisma = new PrismaClient();
 
 const multer = require("multer");
-const path = require("path");
 
-// Konfigurasi storage untuk menyimpan file di folder 'uploads'
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "uploads/"); // Menyimpan file di folder 'uploads'
-  },
-  filename: function (req, file, cb) {
-    // Menamai file dengan timestamp dan ekstensi file aslinya
-    cb(null, Date.now() + path.extname(file.originalname));
-  },
-});
-
-// Membuat instance multer dengan storage
+const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
 // User routes

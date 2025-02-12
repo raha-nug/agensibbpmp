@@ -3,7 +3,7 @@ const prisma = new PrismaClient();
 const path = require("path");
 const fs = require("fs");
 const sendEmail = require("./send_mail");
-const ftpUploader = require("../utils/ftpUploader")
+const uploadToFTP = require("../utils/ftpUploader");
 
 // Get All Surat
 const getAllSurat = async (req, res) => {
@@ -45,28 +45,31 @@ const getSuratById = async (req, res) => {
 };
 
 // Create New Surat
+
 const createSurat = async (req, res) => {
   const { judul, deskripsi, deadline, tujuan } = req.body;
 
   try {
     let lampiran = null;
 
-    // Jika ada file yang diupload, langsung kirim ke Hostinger FTP
     if (req.file) {
-      const localPath = req.file.path;
-      const fileName = Date.now() + "-" + req.file.originalname;
-      const remotePath = `uploads/${fileName}`; // Path di Hostinger
+      const buffer = req.file.buffer;
+      const fileName = `${Date.now()}-${req.file.originalname}`;
+      const remotePath = fileName;
 
-      await uploadToFTP(localPath, remotePath); // Upload ke Hostinger
-
-      lampiran = `/uploads/${fileName}`; // Simpan path di database
-
-      // Hapus file sementara dari Vercel setelah diupload ke Hostinger
-      fs.unlink(localPath, (err) => {
-        if (err) console.error("Gagal menghapus file sementara:", err);
-      });
+      await uploadToFTP(buffer, remotePath);
+      lampiran = `https://uploads.agensibbpmp.com/${fileName}`;
     }
 
+    // Pastikan `tujuan` sudah berbentuk array angka
+    const tujuanParsed = Array.isArray(tujuan)
+      ? tujuan.map((id) => parseInt(id))
+      : [];
+
+    // 🟢 Cek tujuan sebelum disimpan
+    console.log("📌 Tujuan Surat:", tujuan);
+
+    // Simpan surat dan hubungan ke users
     const surat = await prisma.surat.create({
       data: {
         judul,
@@ -74,13 +77,50 @@ const createSurat = async (req, res) => {
         lampiran,
         deadline: new Date(deadline),
         tujuan: {
-          create: tujuan.map((userId) => ({
+          create: tujuanParsed.map((userId) => ({
             user: {
-              connect: { id: parseInt(userId) },
+              connect: { id: userId },
             },
           })),
         },
       },
+      include: {
+        tujuan: true, // Pastikan tujuan tersimpan
+      },
+    });
+
+    console.log("✅ Surat berhasil dibuat:", surat);
+
+    // Ambil email dari user yang dipilih
+    const users = await prisma.users.findMany({
+      where: { id: { in: tujuan.map((id) => parseInt(id)) } },
+      select: { email: true },
+    });
+
+    console.log("📧 Email tujuan:", users);
+
+    // Kirim email ke setiap user tujuan
+    users.forEach(async (user) => {
+      try {
+        console.log(`📨 Mengirim email ke: ${user.email}`);
+        await sendEmail({
+          to: user.email,
+          subject: `📌 Pemberitahuan Surat Baru: ${judul}`,
+          text: `Halo,
+
+Anda mendapatkan surat baru dengan judul: "${judul}".
+Deskripsi: ${deskripsi}
+Deadline: ${deadline}
+
+Silakan cek portal untuk informasi lebih lanjut.
+
+Salam,
+Portal Agensi BBPMP`,
+        });
+        console.log(`✅ Email sukses dikirim ke ${user.email}`);
+      } catch (error) {
+        console.error(`❌ Gagal mengirim email ke ${user.email}:`, error);
+      }
     });
 
     res.redirect("/admin/track");

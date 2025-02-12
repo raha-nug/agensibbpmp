@@ -23,12 +23,6 @@ require('./controllers/email_reminder'); // Menjalankan email reminder by cron j
 app.use(express.static("public"));
 app.set("view engine", "ejs"); //menggunakan template engine ejs, semua file .ejs disimpan di folder views
 
-app.use("/css", express.static(__dirname + "/node_modules/bootstrap/dist/css")); //memanggil css di path /css
-app.use("/js", express.static(__dirname + "/node_modules/bootstrap/dist/js")); //memanggil js di path /js
-app.use(
-  "/icons",
-  express.static(__dirname + "/node_modules/bootstrap-icons/font/")
-); //memanggil icon di path /icons
 
 app.use("/auth", authRoute);
 app.use("/agensi", verifyToken, agensiRoute);
