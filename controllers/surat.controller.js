@@ -100,13 +100,15 @@ const createSurat = async (req, res) => {
     console.log("📧 Email tujuan:", users);
 
     // Kirim email ke setiap user tujuan
-    users.forEach(async (user) => {
-      try {
-        console.log(`📨 Mengirim email ke: ${user.email}`);
-        await sendEmail({
-          to: user.email,
-          subject: `📌 Pemberitahuan Surat Baru: ${judul}`,
-          text: `Halo,
+    // Kirim email ke setiap user tujuan (gunakan Promise.all agar menunggu semua selesai)
+    await Promise.all(
+      users.map(async (user) => {
+        try {
+          console.log(`📨 Mengirim email ke: ${user.email}`);
+          await sendEmail({
+            to: user.email,
+            subject: `📌 Pemberitahuan Surat Baru: ${judul}`,
+            text: `Halo,
 
 Anda mendapatkan surat baru dengan judul: "${judul}".
 Deskripsi: ${deskripsi}
@@ -116,14 +118,17 @@ Silakan cek portal untuk informasi lebih lanjut.
 
 Salam,
 Portal Agensi BBPMP`,
-        });
-        console.log(`✅ Email sukses dikirim ke ${user.email}`);
-      } catch (error) {
-        console.error(`❌ Gagal mengirim email ke ${user.email}:`, error);
-      }
-    });
+          });
+          console.log(`✅ Email sukses dikirim ke ${user.email}`);
+        } catch (error) {
+          console.error(`❌ Gagal mengirim email ke ${user.email}:`, error);
+        }
+      })
+    );
 
+    // 🔹 Redirect setelah semua email selesai dikirim
     res.redirect("/admin/track");
+
   } catch (error) {
     console.error("❌ Error:", error);
     res.status(500).json({ error: "Failed to create surat" });
